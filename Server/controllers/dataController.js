@@ -7,6 +7,7 @@ const dataController = require('express').Router();
 //get all ads
 dataController.get('/catalog', async (req, res) => {
     let ads = [];
+    //get ad by userId
     if (req.query.where) {
         const userId = JSON.parse(req.query.where.split('=')[1]);
         ads = await getByUserId(userId);

@@ -24,7 +24,7 @@ async function start() {
         app.listen(3000, () => console.log('App is listening on port 3000...'));
 
         app.use('/auth', authController);
-        app.use('/data', dataController);
+        app.use('/ads', dataController);
 
 }
 
