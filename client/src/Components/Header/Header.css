@@ -1,0 +1,27 @@
+.header {
+    background-color: #002F34;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav .logo {
+    width: 100px;
+    height: 80px;
+}
+
+.nav .listItems {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* justify-content: space-between; */
+}
+
+.listItems .listItem{
+    color: #dddddd;
+    font-weight: bold;
+}
