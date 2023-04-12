@@ -1,0 +1,22 @@
+.searchFormWrapper {
+}
+
+.searchForm {
+      width: 70%;
+      margin: 50px auto;
+      display: flex;
+      gap: 2px;
+}
+
+.searchText {
+      width: 60%;
+}
+
+.sInput {
+      height: 60px;
+      border: none;
+}
+
+.primary {
+    border-radius: 2px;
+}

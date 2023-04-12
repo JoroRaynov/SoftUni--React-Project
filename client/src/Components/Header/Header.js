@@ -29,7 +29,7 @@ export default function Header() {
                     <li className="listItem">
                         <Link to={"/"} className="message" >Твоят Профил</Link >
                     </li>
-                    <Link to={"/"} className="primary addAd">Добави обява</Link>
+                    <Link to={"/data/catalog/new"} className="primary addAd">Добави обява</Link>
                 </ul>
             </nav>
         </header>
