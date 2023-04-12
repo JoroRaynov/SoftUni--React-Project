@@ -6,7 +6,6 @@ const { parseError } = require('../util/parser');
 const dataController = require('express').Router();
 //get all ads
 dataController.get('/catalog', async (req, res) => {
-    console.log('CATALOG')
     let ads = [];
 
     //get ad by userId

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import './AdItem.css'
 
 export const AdItem = ({
@@ -12,23 +14,28 @@ export const AdItem = ({
     return (
         <>
             <article className="card">
-                <div className="cardPictureWrapper">
-                    <img className="cardImg" src={imageUrl} alt="" />
-                </div>
+                <Link to={`/data/${_id}/details`} >
+                    <div className="cardPictureWrapper">
+                        <img className="cardImg" src={imageUrl} alt="" />
+                    </div>
+
+                </Link>
                 <div className="cardDescWrapper">
                     <p className="cardTitle">
                         {title}
                     </p>
                     <p className="cardLocation">
-                       {location}
+                        {location}
                     </p>
                     <div className="cardFooter">
                         <span className="cardPrice">
-                           {price}
+                            {price}
                         </span>
-                        <span>
-                            <i class="fa-regular fa-heart"></i>
-                        </span>
+                        <Link to={""}>
+                            <span>
+                                <i className="fa-regular fa-heart"></i>
+                            </span>
+                        </Link>
                     </div>
 
                 </div>

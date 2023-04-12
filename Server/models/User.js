@@ -5,7 +5,8 @@ const userSchema = new Schema ({
     email: {type: String, required: true, minLength: [8, 'Username must be at least 8 characters long'],unique: true},
     hashedPassword: {type: String, required: true},
     tel: {type: Number, default: ''},
-    userAds: {type: [ObjectId], ref: 'AdModel'}
+    userAds: {type: [ObjectId], ref: 'AdModel'},
+    likedAds: {type: [ObjectId], ref: 'AdModel'}
 });
 
 

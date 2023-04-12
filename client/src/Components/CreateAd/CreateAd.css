@@ -1,6 +1,6 @@
 
-form {
-    max-width: 300px;
+.createForm {
+    max-width: 500px;
     margin: 10px auto;
     padding: 10px 20px;
     background: #002F34;
@@ -97,11 +97,11 @@ form {
     text-shadow: 0 1px 0 rgba(255,255,255,0.2);
     border-radius: 100%;
   }
-  
+/*   
   @media screen and (min-width: 480px) {
   
     form {
       max-width: 480px;
     }
   
-  }
+  } */
