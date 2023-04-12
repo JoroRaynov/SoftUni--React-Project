@@ -21,7 +21,7 @@ async function start() {
         app.use(cors());
         app.use(trimBody())
         app.use(session());
-        app.listen(3000, () => console.log('App is listening on port 3000...'));
+        app.listen(3030, () => console.log('App is listening on port 3030...'));
 
         app.use('/auth', authController);
         app.use('/ads', dataController);

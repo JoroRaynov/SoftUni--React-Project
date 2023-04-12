@@ -6,7 +6,9 @@ const { parseError } = require('../util/parser');
 const dataController = require('express').Router();
 //get all ads
 dataController.get('/catalog', async (req, res) => {
+    console.log('CATALOG')
     let ads = [];
+
     //get ad by userId
     if (req.query.where) {
         const userId = JSON.parse(req.query.where.split('=')[1]);
@@ -14,6 +16,7 @@ dataController.get('/catalog', async (req, res) => {
     } else {
         ads = await getAll();
     }
+    console.log('ads')
     res.json(ads)
 });
 

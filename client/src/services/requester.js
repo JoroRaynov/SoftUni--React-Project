@@ -1,4 +1,4 @@
-async function requester(method, token, url, data) {
+async function requester(method, url, token, data) {
 
     const options = {};
 
@@ -8,24 +8,24 @@ async function requester(method, token, url, data) {
         if (data) {
             options.headers = {
                 'content-type': 'application/json',
-
             }
             options.body = JSON.stringify(data);
         }
     }
-    if(token) {
+    if (token) {
         options.headers = {
-            ...options.headers, 
-            'X-Authorization' : token
+            ...options.headers,
+            'X-Authorization': token
         }
     }
 
     const response = await fetch(url, options);
-
+    
     try {
         const result = await response.json();
-        return result;
+        return result
     } catch (e) {
+        console.log('ERRRRORR')
         console.log('Error: ' + e);
         // return {};
     }
