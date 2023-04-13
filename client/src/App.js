@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import { useContext } from 'react';
 
 import './App.css';
 import Header from './Components/Header/Header';

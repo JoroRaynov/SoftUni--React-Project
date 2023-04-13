@@ -1,19 +1,21 @@
 import './Register.css';
 import { useState } from 'react'
+
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useForm } from '../../Hooks/Form/useForm';
 import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
-    const { onRegisterSubmit } = useAuthContext({});
+    const { onRegisterSubmit, errorss } = useAuthContext({});
 
+    const [disable, setDisable] = useState(false)
     const [errors, setErrors] = useState({
         email: false,
         password: false,
         rePass: false,
     });
-
+console.log(errorss)
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
         password: '',
@@ -31,14 +33,16 @@ export const Register = () => {
             const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!e.target.value.match(emailRegex)) {
                 setErrors(state => ({ ...state, [e.target.name]: true }));
+                setDisable(true);
             }
 
         } else if (e.target.name === 'password' &&
             (e.target.value.length < 6 || e.target.value.length > 20)) {
             setErrors(state => ({ ...state, [e.target.name]: true }));
-
+            setDisable(true);
         } else if (e.target.name === 'rePass' && e.target.value !== values.password) {
             setErrors(state => ({ ...state, [e.target.name]: true }))
+            setDisable(true);
         }
 
     }
@@ -103,7 +107,7 @@ export const Register = () => {
                 <input type="submit" className="submit" value="Регистрирай се" />
                 {/* {errors.length > 0 && <span>{errors}</span>} */}
 
-                <Link to={"/auth/login"} className="registered">Имате регистрация ?</Link>
+                <Link to={"/auth/login"}  className="registered">Имате регистрация ?</Link>
             </form>
         </section>
     );

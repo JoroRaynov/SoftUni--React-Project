@@ -27,6 +27,9 @@ export default function Header() {
                             <Link to={"/"} className="message" > <i className="fa-regular fa-user"></i>Твоят Профил</Link >
                         </li>
                         <Link to={"/data/catalog/new"} className="primary addAd">Добави обява</Link>
+                        <li className="listItem">
+                            <Link to={"/"} className="message" >Изход <i className="fa-solid fa-arrow-right-from-bracket"></i></Link >
+                        </li>
                     </>)}
 
                     {!isAuthenticated &&

@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { useLocalStorage } from "../Hooks/Form/useLocalStorage";
 import * as authService from '../services/authService'
@@ -8,6 +9,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({
     children,
 }) => {
+
+    const navigate = useNavigate();
     const [auth, setAuth] = useLocalStorage('auth', {});
 
     const onRegisterSubmit = async (values) => {
@@ -20,13 +23,15 @@ export const AuthProvider = ({
             const result = await authService.register(registerData);
 
             if (result.message) {
-                console.log(result)
+                console.log(result.message);
+                setAuth({});
+
             }
             setAuth(result);
-
+            navigate('/')
 
         } catch (error) {
-            console.log('Something went wrong' + error);
+            console.log('Something went wrong' + error.msg);
         }
 
     }
@@ -37,7 +42,7 @@ export const AuthProvider = ({
         token: auth.token?.accessToken,
         userEmail: auth.token?.email,
         isAuthenticated: !!auth.token?.accessToken,
-        errors: [auth.message]
+        errorss: [auth.message]
     }
 
     return (

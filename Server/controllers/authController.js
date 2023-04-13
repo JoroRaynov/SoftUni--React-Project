@@ -18,8 +18,10 @@ authController.post('/register',
             res.json({ token });
 
         } catch (err) {
-            console.log(err);
+            console.log('YES2')
+
             const message = parseError(err)
+            console.log(message);
             res.status(400).json({ message })
         }
     });
@@ -29,9 +31,9 @@ authController.post('/login', async (req, res) => {
         const token = await login(req.body.email, req.body.password);
         res.json({ token });
     } catch (err) {
-        
+        console.log('YES2')
         const message = parseError(err)
-        
+
 
         res.status(401).json({ message })
     }
