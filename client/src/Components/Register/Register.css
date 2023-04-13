@@ -118,3 +118,8 @@
     background-color: #02393f;
   }
   
+  .formError {
+    color: red;
+    margin: 2px 6px;
+    text-align: center;
+  }

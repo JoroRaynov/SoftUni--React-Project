@@ -16,23 +16,28 @@ export const AuthProvider = ({
             return;
         }
         try {
+
             const result = await authService.register(registerData);
+
+            if (result.message) {
+                console.log(result)
+            }
             setAuth(result);
-            console.log(auth.token.accessToken)
+
 
         } catch (error) {
             console.log('Something went wrong' + error);
         }
 
     }
-    console.log('AUTH')
-    console.log(auth)
+
     const contextValues = {
         onRegisterSubmit,
         userId: auth.token?._id,
         token: auth.token?.accessToken,
         userEmail: auth.token?.email,
-        isAuthenticated: !!auth.token?.accessToken
+        isAuthenticated: !!auth.token?.accessToken,
+        errors: [auth.message]
     }
 
     return (
