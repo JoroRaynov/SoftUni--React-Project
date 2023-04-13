@@ -1,12 +1,9 @@
-import { createContext } from "react";
-import { useState, useEffect } from 'react';
-import { useContext } from "react";
+import { createContext, useState, useEffect, useContext  } from "react";
 
 import * as adService from '../services/adsService'
 
+
 export const AdContext = createContext();
-
-
 
 export const AdProvider = ({
     children
@@ -37,5 +34,4 @@ export const useAdContext = () => {
     const context = useContext(AdContext);
 
     return context;
-
 }

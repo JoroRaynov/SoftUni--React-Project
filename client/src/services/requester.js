@@ -1,5 +1,4 @@
-async function requester(method, url, token, data) {
-
+async function requester(method, url, data) {
     const options = {};
 
     if (method !== 'GET') {
@@ -12,18 +11,25 @@ async function requester(method, url, token, data) {
             options.body = JSON.stringify(data);
         }
     }
-    if (token) {
-        options.headers = {
-            ...options.headers,
-            'X-Authorization': token
+    const serializedAuth = localStorage.getItem('auth')
+    if (serializedAuth) {
+        const auth = JSON.parse(serializedAuth)
+
+        if (auth.accessToken) {
+            options.headers = {
+                ...options.headers,
+                'X-Authorization': auth.accessToken
+            }
         }
+
     }
 
     const response = await fetch(url, options);
-    
+
     try {
         const result = await response.json();
-        return result
+        console.log(result);
+        return result;
     } catch (e) {
         console.log('ERRRRORR')
         console.log('Error: ' + e);

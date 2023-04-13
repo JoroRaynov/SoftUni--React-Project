@@ -1,8 +1,9 @@
 import * as request from './requester';
 
-const baseUrl = 'http:"//localhost:3000/auth';
+const baseUrl = 'http://localhost:3030/auth';
 
-export const register =  (data) => {
-    return request.post(`${baseUrl}/register`, data);
-
+export const register = async (data) => {
+    const result = await request.post(`${baseUrl}/register`, data);
+    console.log(result);
+    return result;
 }

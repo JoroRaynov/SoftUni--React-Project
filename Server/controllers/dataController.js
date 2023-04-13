@@ -15,7 +15,6 @@ dataController.get('/catalog', async (req, res) => {
     } else {
         ads = await getAll();
     }
-    console.log('ads')
     res.json(ads)
 });
 

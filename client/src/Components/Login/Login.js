@@ -18,7 +18,7 @@ export const Login = () => {
                 <div className={`${styles["input-container"]} ${styles.ic2}`}
                 
                 >
-                    <input id="password" className={styles["input"]} type="text" placeholder=" " />
+                    <input id="password" className={styles["input"]} type="password" placeholder=" " />
                     <div className={styles["cut"]} />
                     <label htmlFor="password" className={styles["placeholder"]}>
                         Парола
@@ -32,7 +32,7 @@ export const Login = () => {
                     </label>
                 </div> */}
                 <button type="text" className={styles["submit"]}>
-                    submit
+                    Влез
                 </button>
 
                 <Link to={"/auth/register"} className={styles["notRegistered"]}>Все още нямате регистрация ?</Link>
