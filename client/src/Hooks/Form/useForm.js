@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 export const useForm = (initialValues, onSubmitHandler) => {
     const [values, setValues] = useState(initialValues);
-
+    
     const changeHandler = (e) => {
         setValues(state => ({...state, [e.target.name]: e.target.value}));
     };
@@ -11,7 +11,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
         e.preventDefault();
 
         onSubmitHandler(values);
-
+       
         setValues(initialValues);
     };
 

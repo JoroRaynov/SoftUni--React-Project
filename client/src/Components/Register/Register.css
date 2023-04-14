@@ -3,7 +3,7 @@
   .registerForm {
     background-color: #002F34;
     border-radius: 20px;
-    height: 560px;
+    height: 600px;
     padding: 20px;
     width: 420px;
     margin: 60px auto;
@@ -118,8 +118,12 @@
     background-color: #02393f;
   }
   
-  .formError {
+  .formError, .serverErrors, .registered {
     color: red;
     margin: 2px 6px;
     text-align: center;
+  }
+
+  .registered {
+    color: white;
   }

@@ -1,5 +1,6 @@
 import './Register.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useForm } from '../../Hooks/Form/useForm';
@@ -7,15 +8,19 @@ import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
-    const { onRegisterSubmit, errorss } = useAuthContext({});
+    const { onRegisterSubmit, serverErrors,resetServerErrors } = useAuthContext({});
 
+    // useEffect(()=> {
+    //     resetServerErrors([])
+    // },[]);
+    
     const [disable, setDisable] = useState(false)
     const [errors, setErrors] = useState({
         email: false,
         password: false,
         rePass: false,
     });
-console.log(errorss)
+
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
         password: '',
@@ -28,7 +33,7 @@ console.log(errorss)
     };
 
     const onBlurHandler = (e) => {
-
+        resetServerErrors([]);
         if (e.target.name === 'email') {
             const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!e.target.value.match(emailRegex)) {
@@ -105,7 +110,7 @@ console.log(errorss)
 
                 </div>
                 <input type="submit" className="submit" value="Регистрирай се" />
-                {/* {errors.length > 0 && <span>{errors}</span>} */}
+                {serverErrors.length > 0 && <p className="serverErrors" >{serverErrors.split(",").join('')}</p>} 
 
                 <Link to={"/auth/login"}  className="registered">Имате регистрация ?</Link>
             </form>
