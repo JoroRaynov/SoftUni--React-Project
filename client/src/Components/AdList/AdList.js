@@ -7,7 +7,7 @@ export const AdList = ({
     return (
         <>
             <h2 className="lastAds">Последни Обяви</h2>
-            <section id="cards">
+            <section className="cards">
                 {ads.map(ad => <AdItem key={ad._id} {...ad} />)}
 
 {/* 

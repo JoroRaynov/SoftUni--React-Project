@@ -9,6 +9,7 @@ import { AdCreate } from './Components/AdCreate/AdCreate';
 import { AdProvider } from './contexts/AdContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { AdDetails } from './Components/AdDetails/AdDetails';
+import { AdsUser } from './Components/AdsUser/AdsUser';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path={"/auth/login"} element={<Login />} />
               <Route path={"/data/catalog/new"} element={<AdCreate />} />
               <Route path={"/data/:adId/details"} element={<AdDetails />} />
+              <Route path={"/data/user/:userId/catalog"} element={<AdsUser />} />
             </Routes>
           </main>
         </AdProvider>

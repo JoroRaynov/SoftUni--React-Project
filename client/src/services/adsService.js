@@ -8,6 +8,11 @@ export const getAll = async () => {
 }
 
 export const getOne = async (id) => {
-    const result = await request.get(`${baseUrl}/catalog/${id}`);   
+    const result = await request.get(`${baseUrl}/catalog/${id}`);
+    return result;
+}
+
+export const getAllUserAds = async (id) => {
+    const result = await request.get(`${baseUrl}/catalog?where=_ownerId%3D%22${id}%22`);
     return result;
 }

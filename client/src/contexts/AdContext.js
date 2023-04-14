@@ -14,7 +14,6 @@ export const AdProvider = ({
         adService.getAll()
             .then(result => {
                 setAds(result);
-                console.log(result);
             })
     }, [])
 

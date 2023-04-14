@@ -27,18 +27,14 @@ async function requester(method, url, data) {
     const response = await fetch(url, options);
     if (response.status === 400) {
         const result = await response.json();
-        console.log(result);
         return result;
     }
     try {
 
         const result = await response.json();
-        console.log(result);
         return result;
     } catch (e) {
-        console.log('ERRRRORR')
         console.log('Error: ' + e);
-        // return {};
     }
 
 }

@@ -28,7 +28,6 @@ export const AuthProvider = ({
             const result = await authService.register(registerData);
 
             if (result.message) {
-                console.log(result.message);
                 return setServerErrors(result.message);
 
             }
@@ -48,7 +47,6 @@ export const AuthProvider = ({
 
             const result = await authService.login(values);
             if (result.message) {
-                console.log(result.message);
                 return setServerErrors(result.message);
             }
             setAuth(result);

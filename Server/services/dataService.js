@@ -6,7 +6,8 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return AdModel.findById(id).populate('_ownerId');
+    return AdModel.findById(id);
+    // .populate('_ownerId')
 }
 
 
