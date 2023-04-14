@@ -17,6 +17,10 @@ export const AdProvider = ({
             })
     }, [])
 
+    const createGame = (value) => {
+        console.log(value);
+
+    }
 
     const contextValues = {
         ads,
