@@ -6,3 +6,8 @@ export const getAll = async () => {
     const result = await request.get(`${baseUrl}/catalog`);
     return result;
 }
+
+export const getOne = async (id) => {
+    const result = await request.get(`${baseUrl}/catalog/${id}`);   
+    return result;
+}
