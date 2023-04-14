@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect, useContext  } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 import * as adService from '../services/adsService'
+import { useAuthContext } from '../contexts/AuthContext'
 
 
 export const AdContext = createContext();
@@ -8,6 +9,8 @@ export const AdContext = createContext();
 export const AdProvider = ({
     children
 }) => {
+    const { token } = useAuthContext()
+
     const [ads, setAds] = useState([]);
     useEffect(() => {
 
@@ -16,14 +19,15 @@ export const AdProvider = ({
                 setAds(result);
             })
     }, [])
-
-    const createGame = (value) => {
-        console.log(value);
+    const createGame = async (data) => {
+        const result = await adService.create(data, token);
+        console.log(result)
 
     }
 
     const contextValues = {
         ads,
+        createGame
     };
 
     return (

@@ -11,18 +11,23 @@ async function requester(method, url, data) {
             options.body = JSON.stringify(data);
         }
     }
-    const serializedAuth = localStorage.getItem('auth')
-    if (serializedAuth) {
-        const auth = JSON.parse(serializedAuth)
 
-        if (auth.accessToken) {
+    const serializedAuth = localStorage.getItem('auth');
+    if (serializedAuth) {
+        const auth = JSON.parse(serializedAuth);
+        console.log(auth.token.accessToken)
+
+        // if (auth.accessToken) {
             options.headers = {
                 ...options.headers,
-                'X-Authorization': auth.accessToken
-            }
+                'X-Authorization': auth.token.accessToken,
+            };
+
         }
 
-    }
+    // }
+    console.log('BEFORE OPTIONS')
+    console.log(options)
 
     const response = await fetch(url, options);
     if (response.status === 400) {

@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useForm } from '../../Hooks/Form/useForm'
+
+import { useAdContext } from '../../contexts/AdContext';
 import './AdCreate.css'
 
 export const AdCreate = () => {
-
-    const {values, onSubmit, changeHandler} = useForm({
+    const { createGame } = useAdContext();
+    const { values, onSubmit, changeHandler } = useForm({
         title: '',
         category: '',
         imageUrl: '',
         price: '',
         description: ''
-    })
-
+    }, createGame)
+    
     return (
         <>
-            <meta charSet="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Sign Up Form</title>
             <link rel="stylesheet" href="css/normalize.css" />
             <link
                 href="https://fonts.googleapis.com/css?family=Nunito:400,300"
@@ -24,7 +23,7 @@ export const AdCreate = () => {
                 type="text/css"
             />
             <link rel="stylesheet" href="css/main.css" />
-            <form className="createForm">
+            <form onSubmit={onSubmit} className="createForm">
                 <h1 className="titleCreateAd white">Добави обява</h1>
                 <fieldset>
                     <legend className="white">
@@ -32,26 +31,62 @@ export const AdCreate = () => {
                     </legend>
 
                     <label htmlFor="title" className="white">Заглавие*</label>
-                    <input type="text" className={"titleAdd"} id="title" name="title" placeholder="Например: iPhone 11 с гаранция" />
-                    <label htmlFor="job" className="white">Категория*</label>
-                    <select id="category" name="category">
-                        <option value="autoParts" >Авточасти, аксесоари, гуми и джанти, коли</option>
-                        <option value="realEstate">Недживими Имоти</option>
-                        <option value="electronic">Електроника</option>
-                        <option value="animals">Животни</option>
-                        <option value="forBabies">За бебето и детето</option>
-                        <option value="tools">Машини, инструменти, бизнес оборудване</option>
-                        <option value="fashion">Мода</option>
+                    <input
+                        type="text"
+                        className={"titleAdd"}
+                        id="title"
+                        value={values.title}
+                        onChange={changeHandler}
+                        name="title"
+                        placeholder="Например: iPhone 11 с гаранция"
+                    />
+
+                    <label htmlFor="category" className="white">Категория*</label>
+                    <select
+                        // type="text"
+                        // id="category"
+                        onChange={changeHandler}
+                        value={values.category}
+                        name="category"
+                    >
+                        <option onChange={changeHandler} value="autoParts" >Авточасти, аксесоари, гуми и джанти, коли</option>
+                        <option onChange={changeHandler} value="realEstate">Недживими Имоти</option>
+                        <option onChange={changeHandler} value="electronic">Електроника</option>
+                        <option onChange={changeHandler} value="animals">Животни</option>
+                        <option onChange={changeHandler} value="forBabies">За бебето и детето</option>
+                        <option onChange={changeHandler} value="tools">Машини, инструменти, бизнес оборудване</option>
+                        <option onChange={changeHandler} value="fashion">Мода</option>
+
                     </select>
+
                     <label htmlFor="text" className="white">Снимка</label>
-                    <input type="url" className={"urlAdd"} id="imageUrl" name="imageUrl" />
+                    <input
+                        type="url"
+                        className={"urlAdd"}
+                        value={values.imageUrl}
+                        onChange={changeHandler}
+                        id="imageUrl"
+                        name="imageUrl"
+                    />
                     <label htmlFor="price" className="white">Цена</label>
-                    <input type="number" className={"numberAdd"} id="price" name="price" />
+                    <input
+                        type="number"
+                        className={"numberAdd"}
+                        value={values.price}
+                        onChange={changeHandler}
+                        id="price"
+                        name="price"
+                    />
 
                 </fieldset>
                 <fieldset>
                     <label htmlFor="description" className="white">Описание</label>
-                    <textarea id="description" name="description" defaultValue={""} />
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={values.description}
+                        onChange={changeHandler}
+                    />
                 </fieldset>
                 <fieldset>
                 </fieldset>

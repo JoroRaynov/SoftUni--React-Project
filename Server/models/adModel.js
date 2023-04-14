@@ -11,8 +11,8 @@ const adSchema = new Schema({
     price: { type: 'number', requirsed: true, min: [1, 'Price must be positive number']},
     description: {type: 'string', required: true, minLength: [10, 'Description must be at least 10 characters long']},
     _ownerId: {type: ObjectId, ref: 'User'},
-    location: {type: 'string', required: true},
-    contact: {type: 'string', required: true}
+    location: {type: 'string', required: false},
+    contact: {type: 'string', required: false}
 });
 
 
