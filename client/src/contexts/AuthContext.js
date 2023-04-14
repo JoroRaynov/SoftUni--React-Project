@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({
     children,
 }) => {
-  
+
     const navigate = useNavigate();
     const [auth, setAuth] = useLocalStorage('auth', {});
     const [serverErrors, setServerErrors] = useState([]);
@@ -17,7 +17,7 @@ export const AuthProvider = ({
     const resetServerErrors = (value) => {
         setServerErrors(value)
     }
-    
+
     const onRegisterSubmit = async (values) => {
         const { rePass, ...registerData } = values;
         if (rePass !== registerData.password) {
@@ -42,6 +42,23 @@ export const AuthProvider = ({
 
     }
 
+    const onLoginSubmit = async (values) => {
+
+        try {
+
+            const result = await authService.login(values);
+            if (result.message) {
+                console.log(result.message);
+                return setServerErrors(result.message);
+            }
+            setAuth(result);
+            navigate('/')
+
+        } catch (error) {
+            console.log('Unsuccessful login!')
+        }
+    }
+
     const contextValues = {
         onRegisterSubmit,
         userId: auth.token?._id,
@@ -50,7 +67,8 @@ export const AuthProvider = ({
         isAuthenticated: !!auth.token?.accessToken,
         serverErrors,
         setServerErrors,
-        resetServerErrors
+        resetServerErrors,
+        onLoginSubmit
     }
 
     return (

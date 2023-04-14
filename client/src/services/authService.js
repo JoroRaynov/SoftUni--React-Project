@@ -8,3 +8,8 @@ export const register = async (data) => {
     console.log(result);
     return result;
 }
+
+export const login = async (data) => {
+    const result = await request.post(`${baseUrl}/login`, data);
+    return result;
+}

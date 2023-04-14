@@ -8,13 +8,7 @@ import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
-    const { onRegisterSubmit, serverErrors,resetServerErrors } = useAuthContext({});
-
-    // useEffect(()=> {
-    //     resetServerErrors([])
-    // },[]);
-    
-    const [disable, setDisable] = useState(false)
+    const { onRegisterSubmit, serverErrors, resetServerErrors } = useAuthContext({});
     const [errors, setErrors] = useState({
         email: false,
         password: false,
@@ -38,16 +32,13 @@ export const Register = () => {
             const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!e.target.value.match(emailRegex)) {
                 setErrors(state => ({ ...state, [e.target.name]: true }));
-                setDisable(true);
             }
 
         } else if (e.target.name === 'password' &&
             (e.target.value.length < 6 || e.target.value.length > 20)) {
             setErrors(state => ({ ...state, [e.target.name]: true }));
-            setDisable(true);
         } else if (e.target.name === 'rePass' && e.target.value !== values.password) {
             setErrors(state => ({ ...state, [e.target.name]: true }))
-            setDisable(true);
         }
 
     }
@@ -110,9 +101,9 @@ export const Register = () => {
 
                 </div>
                 <input type="submit" className="submit" value="Регистрирай се" />
-                {serverErrors.length > 0 && <p className="serverErrors" >{serverErrors.split(",").join('')}</p>} 
+                {serverErrors.length > 0 && <p className="serverErrors" >{serverErrors.split(",").join('')}</p>}
 
-                <Link to={"/auth/login"}  className="registered">Имате регистрация ?</Link>
+                <Link to={"/auth/login"} className="registered">Имате регистрация ?</Link>
             </form>
         </section>
     );
