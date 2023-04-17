@@ -11,3 +11,9 @@ export const login = async (data) => {
     const result = await request.post(`${baseUrl}/login`, data);
     return result;
 }
+
+export const getUserById = async(id) => {
+    const result = await request.get(`${baseUrl}/userProfile`, id);
+    return result;
+
+}

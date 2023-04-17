@@ -21,8 +21,6 @@ export const AdProvider = ({
     }, [])
     const createGame = async (data) => {
         const result = await adService.create(data, token);
-        console.log(result)
-
     }
 
     const contextValues = {

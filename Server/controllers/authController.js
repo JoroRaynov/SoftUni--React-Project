@@ -18,10 +18,8 @@ authController.post('/register',
             res.json({ token });
 
         } catch (err) {
-            console.log('YES2')
 
             const message = parseError(err)
-            console.log(message);
             res.status(400).json({ message })
         }
     });
@@ -31,7 +29,6 @@ authController.post('/login', async (req, res) => {
         const token = await login(req.body.email, req.body.password);
         res.json({ token });
     } catch (err) {
-        console.log('YES2')
         const message = parseError(err)
 
 
@@ -42,6 +39,12 @@ authController.post('/login', async (req, res) => {
 authController.get('/profile', hasUser(), async (req, res) => {
     console.log(req.user)
     const userData = await getUserData(req.user._id);
+    res.json(userData);
+})
+
+authController.get('/userProfile', async (req, res) => {
+    console.log(req.body)
+    const userData = await getUserData(req.body._id);
     res.json(userData);
 })
 

@@ -17,9 +17,6 @@ export const getAllUserAds = async (id) => {
     return result;
 }
 export const create = async (data, token) => {
-    console.log('CREATE')
     const result = await request.post(`${baseUrl}/catalog`, data);
-    const tok = localStorage.getItem('auth');
-    console.log(tok)
     return result;
 }

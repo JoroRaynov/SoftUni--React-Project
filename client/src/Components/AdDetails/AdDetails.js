@@ -3,26 +3,37 @@ import { useParams, Link } from 'react-router-dom';
 
 import './AdDetails.css'
 import * as adsService from '../../services/adsService';
+import * as authService from '../../services/authService'
 import { useAuthContext } from '../../contexts/AuthContext';
 
 export const AdDetails = () => {
-    const { userId, userEmail } = useAuthContext()
+    const { userId } = useAuthContext()
     const [ad, setAd] = useState({});
+    // const [owner, setOwner] = useState({})
     const { adId } = useParams();
     useEffect(() => {
         adsService.getOne(adId)
             .then((result) => {
                 setAd(result);
+                console.log('Before owner ID');
+
                 console.log(ad)
+
             })
+        // .then(result => {
+
+        //     return setOwner(async () => {
+        //         await authService.getUserById(result._ownerId)
+        //     })
+        // })
+
     }, [adId]);
-    const isOwner = ad._ownerId === userId;
-    // 
+    const isOwner = true;
+    // ad._ownerId._id === userId;
 
-    console.log(ad._ownerId + 'AD OWNER');
-    console.log(userId + "USERID");
-    console.log(isOwner)
 
+    // setOwner(ow);
+    console.log(ad)
     return (
         <>
             <section className="details">
@@ -33,11 +44,22 @@ export const AdDetails = () => {
                             Потребител
                         </h3>
                         <div className="userInfo">
-                            <img className="userAvatar" src={require("./assets/Untitled.png")} alt="avatar" />
-                            <h3 className="userInfoDetails-email">
-                                { }
+                            <div className="userInfoImgWrapper">
+                                <img className="userAvatar" src={require("./assets/Untitled.png")} alt="avatar" />
+                            </div>
+                            <div className="userInfoContacts">
+                                {ad._ownerId?.email &&
+                                    <h3 className="userInfoDetails-email">
+                                        {ad._ownerId.email}
+                                    </h3>}
 
-                            </h3>
+                                {ad._ownerId?.tel &&
+                                    <h3 className="userInfoDetails-email">
+                                        {ad._ownerId.tel}
+                                        Телефон:
+                                    </h3>
+                                }
+                            </div>
                         </div>
 
                         {isOwner &&
@@ -51,7 +73,7 @@ export const AdDetails = () => {
                             <button className="call msg">Съобщение</button>
                         </div>)}
 
-                        <Link className="allUserAds" to={`/data/user/${ad._ownerId}/catalog`}>
+                        <Link className="allUserAds" to={`/data/user/${ad._ownerId?._id}/catalog`}>
                             Всички обяви на този потребител
                             {/* ${apiURL}/ads/catalog?where=_ownerId%3D%22${id}%22 */}
                         </Link>
