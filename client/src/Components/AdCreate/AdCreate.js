@@ -14,6 +14,30 @@ export const AdCreate = () => {
         description: ''
     }, createGame)
 
+    const [errors, setErrors] = useState({
+        title: false,
+        category: false,
+        imageUrl: false,
+        price: false,
+        description: false,
+    });
+
+    const onBlurHandler = (e) => {
+        // resetServerErrors([]);
+        if (e.target.name === 'title' && e.target.value === '') {
+                setErrors(state => ({ ...state, [e.target.name]: true }));
+
+        } else if (e.target.name === 'imageUr;' && e.target.value === '') {
+            setErrors(state => ({ ...state, [e.target.name]: true }))
+
+        } else if (e.target.name === 'price' && e.target.value === '') {
+            setErrors(state => ({ ...state, [e.target.name]: true }))
+        } else if (e.target.name === 'description' &&
+            (e.target.value.length < 10 || e.target.value.length > 100)) {
+            setErrors(state => ({ ...state, [e.target.name]: true }));
+        } 
+    }
+    
     return (
         <>
             <link rel="stylesheet" href="css/normalize.css" />
