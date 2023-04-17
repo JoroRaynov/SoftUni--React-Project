@@ -12,8 +12,8 @@ export const login = async (data) => {
     return result;
 }
 
-export const getUserById = async(id) => {
-    const result = await request.get(`${baseUrl}/userProfile`, id);
-    return result;
+// export const getUserById = async(id) => {
+//     const result = await request.get(`${baseUrl}/userProfile`, id);
+//     return result;
 
-}
+// }

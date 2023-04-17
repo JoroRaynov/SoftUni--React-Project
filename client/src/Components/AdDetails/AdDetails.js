@@ -3,11 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 
 import './AdDetails.css'
 import * as adsService from '../../services/adsService';
-import * as authService from '../../services/authService'
+// import * as authService from '../../services/authService'
 import { useAuthContext } from '../../contexts/AuthContext';
 
 export const AdDetails = () => {
-    const { userId } = useAuthContext()
+    const { userId } = useAuthContext();
     const [ad, setAd] = useState({});
     // const [owner, setOwner] = useState({})
     const { adId } = useParams();
@@ -28,8 +28,7 @@ export const AdDetails = () => {
         // })
 
     }, [adId]);
-    const isOwner = true;
-    // ad._ownerId._id === userId;
+    const isOwner = ad._ownerId?._id === userId;
 
 
     // setOwner(ow);
@@ -50,13 +49,17 @@ export const AdDetails = () => {
                             <div className="userInfoContacts">
                                 {ad._ownerId?.email &&
                                     <h3 className="userInfoDetails-email">
-                                        {ad._ownerId.email}
+                                        {ad._ownerId?.email}
                                     </h3>}
 
                                 {ad._ownerId?.tel &&
                                     <h3 className="userInfoDetails-email">
-                                        {ad._ownerId.tel}
-                                        Телефон:
+                                       Телефон: {ad._ownerId?.tel}
+                                    </h3>
+                                }
+                                {ad._ownerId?.location &&
+                                    <h3 className="userInfoDetails-email">
+                                       Гр: {ad._ownerId?.location}
                                     </h3>
                                 }
                             </div>

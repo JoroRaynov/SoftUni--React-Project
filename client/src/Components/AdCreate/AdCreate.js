@@ -13,7 +13,7 @@ export const AdCreate = () => {
         price: '',
         description: ''
     }, createGame)
-    
+
     return (
         <>
             <link rel="stylesheet" href="css/normalize.css" />
@@ -82,6 +82,7 @@ export const AdCreate = () => {
                 <fieldset>
                     <label htmlFor="description" className="white">Описание</label>
                     <textarea
+                    placeholder='Мин. 10 символа'
                         id="description"
                         name="description"
                         value={values.description}

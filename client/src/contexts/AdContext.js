@@ -1,4 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 import * as adService from '../services/adsService'
 import { useAuthContext } from '../contexts/AuthContext'
@@ -9,6 +11,8 @@ export const AdContext = createContext();
 export const AdProvider = ({
     children
 }) => {
+    const navigate = useNavigate();
+
     const { token } = useAuthContext()
 
     const [ads, setAds] = useState([]);
@@ -21,6 +25,8 @@ export const AdProvider = ({
     }, [])
     const createGame = async (data) => {
         const result = await adService.create(data, token);
+        setAds(a => ([...a, result]));
+        navigate('/');
     }
 
     const contextValues = {
