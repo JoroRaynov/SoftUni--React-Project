@@ -5,22 +5,23 @@ const secret = '312rdsfsdf233r4sfddsfs'
 
 const tokenBlacklist = new Set();
 
-async function register(email, password, tel) {
+async function register(email, location, tel, password) {
     const existing = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
     if (existing) {
         throw new Error("Email is taken!")
     }
     const user = await User.create({
         email,
+        location,
+        tel,
         hashedPassword: await bcrypt.hash(password, 10),
-        tel
     });
-    return  createToken(user)
+    return createToken(user)
 
 }
 
-async function getUserData (id){
-    return  User.findById(id);
+async function getUserData(id) {
+    return User.findById(id);
 }
 
 async function login(email, password) {
@@ -33,7 +34,7 @@ async function login(email, password) {
     if (!match) {
         throw new Error("Incorrect email or password!")
     }
-    return  createToken(user)
+    return createToken(user)
 
 }
 
@@ -51,7 +52,7 @@ function createToken(user) {
     return {
         _id: user._id,
         email: user.email,
-        accessToken:  jwt.sign(payload, secret)
+        accessToken: jwt.sign(payload, secret)
     }
 }
 
@@ -69,5 +70,5 @@ function parseToken(token) {
 
 module.exports = {
     register, login, logout,
-    parseToken,getUserData
+    parseToken, getUserData
 }

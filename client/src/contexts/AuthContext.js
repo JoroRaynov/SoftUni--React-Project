@@ -20,6 +20,7 @@ export const AuthProvider = ({
 
     const onRegisterSubmit = async (values) => {
         const { rePass, ...registerData } = values;
+        console.log(registerData)
         if (rePass !== registerData.password) {
             return;
         }

@@ -11,12 +11,16 @@ export const Register = () => {
     const { onRegisterSubmit, serverErrors, resetServerErrors } = useAuthContext({});
     const [errors, setErrors] = useState({
         email: false,
+        location: false,
+        tel: false,
         password: false,
         rePass: false,
     });
 
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
+        location: '',
+        tel: '',
         password: '',
         rePass: '',
     }, onRegisterSubmit);
@@ -34,6 +38,11 @@ export const Register = () => {
                 setErrors(state => ({ ...state, [e.target.name]: true }));
             }
 
+        } else if (e.target.name === 'location' && e.target.value === '') {
+            setErrors(state => ({ ...state, [e.target.name]: true }))
+
+        } else if (e.target.name === 'tel' && e.target.value === '') {
+            setErrors(state => ({ ...state, [e.target.name]: true }))
         } else if (e.target.name === 'password' &&
             (e.target.value.length < 6 || e.target.value.length > 20)) {
             setErrors(state => ({ ...state, [e.target.name]: true }));
@@ -62,6 +71,41 @@ export const Register = () => {
                     <div className="cut" />
                     <label htmlFor="firstname" className="placeholder">
                         Имейл
+                    </label>
+                </div>
+
+                <div className="input-container ic2">
+                    <input
+                        id="location"
+                        className="input"
+                        name="location"
+                        value={values.location}
+                        onChange={errorsModifier}
+                        type="text"
+                        placeholder=""
+                        onBlur={onBlurHandler}
+                    />
+                    {errors.location && <p className="formError" >Location is required</p>}
+                    <div className="cut" />
+                    <label htmlFor="location" className="placeholder">
+                        Град
+                    </label>
+                </div>
+                <div className="input-container ic2">
+                    <input
+                        id="tel"
+                        className="input"
+                        name="tel"
+                        value={values.tel}
+                        onChange={errorsModifier}
+                        type="text"
+                        placeholder=""
+                        onBlur={onBlurHandler}
+                    />
+                    {errors.tel && <p className="formError" >Phone number is required</p>}
+                    <div className="cut" />
+                    <label htmlFor="tel" className="placeholder">
+                        Телефон
                     </label>
                 </div>
                 <div className="input-container ic2">
