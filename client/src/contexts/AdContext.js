@@ -13,7 +13,7 @@ export const AdProvider = ({
 }) => {
     const navigate = useNavigate();
 
-    const { token } = useAuthContext()
+    const { token, modifyServerErrors, serverErrors } = useAuthContext()
 
     const [ads, setAds] = useState([]);
     useEffect(() => {
@@ -25,6 +25,9 @@ export const AdProvider = ({
     }, [])
     const createGame = async (data) => {
         const result = await adService.create(data, token);
+        if (result.message) {
+            return modifyServerErrors(result.message)
+        }
         setAds(a => ([...a, result]));
         navigate('/');
     }

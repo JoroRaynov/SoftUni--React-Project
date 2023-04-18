@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
-    const { onRegisterSubmit, serverErrors, resetServerErrors } = useAuthContext({});
+    const { onRegisterSubmit, serverErrors, modifyServerErrors } = useAuthContext({});
     const [errors, setErrors] = useState({
         email: false,
         location: false,
@@ -31,7 +31,7 @@ export const Register = () => {
     };
 
     const onBlurHandler = (e) => {
-        resetServerErrors([]);
+        modifyServerErrors([]);
         if (e.target.name === 'email') {
             const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!e.target.value.match(emailRegex)) {

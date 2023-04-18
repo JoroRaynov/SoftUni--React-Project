@@ -14,7 +14,7 @@ export const AuthProvider = ({
     const [auth, setAuth] = useLocalStorage('auth', {});
     const [serverErrors, setServerErrors] = useState([]);
 
-    const resetServerErrors = (value) => {
+    const modifyServerErrors = (value) => {
         setServerErrors(value)
     }
 
@@ -66,7 +66,7 @@ export const AuthProvider = ({
         isAuthenticated: !!auth.token?.accessToken,
         serverErrors,
         setServerErrors,
-        resetServerErrors,
+        modifyServerErrors,
         onLoginSubmit
     }
 

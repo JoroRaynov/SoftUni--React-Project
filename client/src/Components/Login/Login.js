@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export const Login = () => {
 
-    const { onLoginSubmit, resetServerErrors, serverErrors } = useAuthContext();
+    const { onLoginSubmit, modifyServerErrors, serverErrors } = useAuthContext();
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
         password: ''
@@ -25,7 +25,7 @@ export const Login = () => {
     };
 
     const onFocused = (e) => {
-        resetServerErrors([]);
+        modifyServerErrors([]);
     }
 
     const onBlurHandler = (e) => {
