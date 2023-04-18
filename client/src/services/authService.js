@@ -12,6 +12,11 @@ export const login = async (data) => {
     return result;
 }
 
+export const logout =  () => {
+    return request.get(`${baseUrl}/logout`);
+
+}
+
 // export const getUserById = async(id) => {
 //     const result = await request.get(`${baseUrl}/userProfile`, id);
 //     return result;

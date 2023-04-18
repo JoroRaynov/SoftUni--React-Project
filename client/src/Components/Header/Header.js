@@ -28,7 +28,7 @@ export default function Header() {
                         </li>
                         <Link to={"/data/catalog/new"} className="primary addAd">Добави обява</Link>
                         <li className="listItem">
-                            <Link to={"/"} className="message" >Изход <i className="fa-solid fa-arrow-right-from-bracket"></i></Link >
+                            <Link to={"/auth/logout"} className="message" >Изход <i className="fa-solid fa-arrow-right-from-bracket"></i></Link >
                         </li>
                     </>)}
 

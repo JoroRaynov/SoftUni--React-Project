@@ -58,6 +58,10 @@ export const AuthProvider = ({
         }
     }
 
+    const onLogOut = async () => {
+        await authService.logout();
+        setAuth({})
+    }
     const contextValues = {
         onRegisterSubmit,
         userId: auth.token?._id,
@@ -67,7 +71,8 @@ export const AuthProvider = ({
         serverErrors,
         setServerErrors,
         modifyServerErrors,
-        onLoginSubmit
+        onLoginSubmit,
+        onLogOut
     }
 
     return (

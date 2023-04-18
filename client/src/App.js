@@ -10,6 +10,9 @@ import { AdProvider } from './contexts/AdContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { AdDetails } from './Components/AdDetails/AdDetails';
 import { AdsUser } from './Components/AdsUser/AdsUser';
+import { Authenticated } from './Components/RouteGuards/Authenticated';
+import { NotAuthenticated } from './Components/RouteGuards/NotAuthenticated';
+import { Logout } from './Components/Logout/Logout';
 
 function App() {
   return (
@@ -20,11 +23,19 @@ function App() {
           <main>
             <Routes>
               <Route path={"/"} element={<Home />} />
-              <Route path={"/auth/register"} element={<Register />} />
-              <Route path={"/auth/login"} element={<Login />} />
-              <Route path={"/data/catalog/new"} element={<AdCreate />} />
               <Route path={"/data/:adId/details"} element={<AdDetails />} />
               <Route path={"/data/user/:userId/catalog"} element={<AdsUser />} />
+
+              <Route element={<Authenticated />} >
+                <Route path={"/data/catalog/new"} element={<AdCreate />} />
+                <Route path={"/auth/logout"} element= {<Logout />} />
+              </Route>
+
+              <Route element={<NotAuthenticated />}>
+                <Route path={"/auth/register"} element={<Register />} />
+                <Route path={"/auth/login"} element={<Login />} />
+              </Route>
+
             </Routes>
           </main>
         </AdProvider>
