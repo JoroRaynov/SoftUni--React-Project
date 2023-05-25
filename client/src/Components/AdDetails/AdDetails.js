@@ -15,10 +15,6 @@ export const AdDetails = () => {
         adsService.getOne(adId)
             .then((result) => {
                 setAd(result);
-                console.log('Before owner ID');
-
-                console.log(ad)
-
             })
         // .then(result => {
 
@@ -32,7 +28,6 @@ export const AdDetails = () => {
 
 
     // setOwner(ow);
-    console.log(ad)
     return (
         <>
             <section className="details">

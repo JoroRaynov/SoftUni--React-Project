@@ -28,7 +28,7 @@ function App() {
 
               <Route element={<Authenticated />} >
                 <Route path={"/data/catalog/new"} element={<AdCreate />} />
-                <Route path={"/auth/logout"} element= {<Logout />} />
+                <Route path={"/auth/logout"} element={<Logout />} />
               </Route>
 
               <Route element={<NotAuthenticated />}>

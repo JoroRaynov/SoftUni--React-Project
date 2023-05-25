@@ -6,7 +6,7 @@ import './AdCreate.css'
 
 export const AdCreate = () => {
     const { createGame } = useAdContext();
-    const { modifyServerErrors, serverErrors } = useAuthContext();
+    const {  serverErrors } = useAuthContext();
     const { values, onSubmit, changeHandler } = useForm({
         title: '',
         category: '',
@@ -29,7 +29,6 @@ export const AdCreate = () => {
     };
     
     const onBlurHandler = (e) => {
-        modifyServerErrors([]);
         if (e.target.name === 'title' && e.target.value === '') {
             setErrors(state => ({ ...state, [e.target.name]: true }));
 
