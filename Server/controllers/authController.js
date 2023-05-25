@@ -9,7 +9,7 @@ authController.post('/register',
     body('email').isEmail().withMessage('Invalid email'),
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long!'),
     body('location').isLength({ min: 3 }).withMessage('Location must be at least 3 characters long!'),
-    body('tel').isLength({ min: 10 }).withMessage('Location must be at least 10 characters long!'),
+    body('tel').isLength({ min: 10 }).withMessage('Phone number must be at least 10 characters long!'),
     async (req, res) => {
         try {
             const { errors } = validationResult(req);

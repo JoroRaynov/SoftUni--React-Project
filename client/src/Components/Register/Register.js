@@ -1,5 +1,5 @@
 import './Register.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -7,15 +7,10 @@ import { useForm } from '../../Hooks/Form/useForm';
 import { Link } from 'react-router-dom';
 
 export const Register = () => {
+    const [errors, setErrors] = useState({});
 
-    const { onRegisterSubmit, serverErrors, modifyServerErrors } = useAuthContext({});
-    const [errors, setErrors] = useState({
-        email: false,
-        location: false,
-        tel: false,
-        password: false,
-        rePass: false,
-    });
+    const { onRegisterSubmit, serverErrors } = useAuthContext({});
+
 
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
@@ -25,32 +20,52 @@ export const Register = () => {
         rePass: '',
     }, onRegisterSubmit);
 
-    const errorsModifier = (e) => {
-        changeHandler(e)
-        setErrors(state => ({ ...state, [e.target.name]: false })); //, ["serverError"]: false
+
+    const lengthErrorHandler = (e, bound) => {
+        if (e.target.value === '') {
+            return;
+        }
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: values[e.target.name].length < bound ? true : false
+        }));
+
+        // if (e.target.name === 'email') {
+        //     const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        //     if (!e.target.value.match(emailRegex)) {
+        //         setErrors(state => ({ ...state, [e.target.name]: true }));
+        //     }
+
+        // } else if (e.target.name === 'location' && e.target.value === '') {
+        //     setErrors(state => ({ ...state, [e.target.name]: true }))
+
+        // } else if (e.target.name === 'tel' && e.target.value === '') {
+        //     setErrors(state => ({ ...state, [e.target.name]: true }))
+        // } else if (e.target.name === 'password' &&
+        //     (e.target.value.length < 6 || e.target.value.length > 20)) {
+        //     setErrors(state => ({ ...state, [e.target.name]: true }));
+        // } else if (e.target.name === 'rePass' && e.target.value !== values.password) {
+        //     setErrors(state => ({ ...state, [e.target.name]: true }))
+        // }
+
     };
 
-    const onBlurHandler = (e) => {
-        modifyServerErrors([]);
-        if (e.target.name === 'email') {
-            const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!e.target.value.match(emailRegex)) {
-                setErrors(state => ({ ...state, [e.target.name]: true }));
-            }
-
-        } else if (e.target.name === 'location' && e.target.value === '') {
-            setErrors(state => ({ ...state, [e.target.name]: true }))
-
-        } else if (e.target.name === 'tel' && e.target.value === '') {
-            setErrors(state => ({ ...state, [e.target.name]: true }))
-        } else if (e.target.name === 'password' &&
-            (e.target.value.length < 6 || e.target.value.length > 20)) {
-            setErrors(state => ({ ...state, [e.target.name]: true }));
-        } else if (e.target.name === 'rePass' && e.target.value !== values.password) {
-            setErrors(state => ({ ...state, [e.target.name]: true }))
+    const emailMatch = (e) => {
+        if (e.target.value === '') {
+            return;
         }
+        const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+        setErrors(state => ({ ...state, [e.target.name]: values[e.target.name].match(emailRegex) ? false : true }));
     }
+
+
+    const passwordsMatchErrorHandler = (e) => {
+        setErrors(state => ({ ...state, [e.target.name]: values[e.target.name] === values.password ? false : true }))
+    }
+
+
+    const isFormValid = !Object.values(values).some(x => x);
 
     return (
         <section className="formWrapper">
@@ -63,8 +78,8 @@ export const Register = () => {
                         className="input"
                         name="email"
                         value={values.email}
-                        onChange={errorsModifier}
-                        onBlur={onBlurHandler}
+                        onChange={changeHandler}
+                        onBlur={emailMatch}
                         type="email"
                         placeholder="" />
                     {errors.email && <p className="formError" >Not Valid Email</p>}
@@ -80,12 +95,12 @@ export const Register = () => {
                         className="input"
                         name="location"
                         value={values.location}
-                        onChange={errorsModifier}
+                        onChange={changeHandler}
                         type="text"
                         placeholder=""
-                        onBlur={onBlurHandler}
+                        onBlur={(e) => lengthErrorHandler(e, 3)}
                     />
-                    {errors.location && <p className="formError" >Location is required</p>}
+                    {errors.location && <p className="formError" >Location must be at least 3 characters long</p>}
                     <div className="cut" />
                     <label htmlFor="location" className="placeholder">
                         Град
@@ -97,12 +112,12 @@ export const Register = () => {
                         className="input"
                         name="tel"
                         value={values.tel}
-                        onChange={errorsModifier}
+                        onChange={changeHandler}
                         type="text"
                         placeholder=""
-                        onBlur={onBlurHandler}
+                        onBlur={(e) => lengthErrorHandler(e, 10)}
                     />
-                    {errors.tel && <p className="formError" >Phone number is required</p>}
+                    {errors.tel && <p className="formError" >Incorrect phone number</p>}
                     <div className="cut" />
                     <label htmlFor="tel" className="placeholder">
                         Телефон
@@ -114,12 +129,12 @@ export const Register = () => {
                         className="input"
                         name="password"
                         value={values.password}
-                        onChange={errorsModifier}
+                        onChange={changeHandler}
                         type="password"
                         placeholder=" "
-                        onBlur={onBlurHandler}
+                        onBlur={(e) => lengthErrorHandler(e, 6)}
                     />
-                    {errors.password && <p className="formError">Password must be between 6 and 20 characters long</p>}
+                    {errors.password && <p className="formError">Password must be at least 6 characters long</p>}
                     <div className="cut" />
                     <label htmlFor="password" className="placeholder">
                         Парола
@@ -131,10 +146,10 @@ export const Register = () => {
                         className="input"
                         name="rePass"
                         value={values.rePass}
-                        onChange={errorsModifier}
+                        onChange={changeHandler}
                         type="password"
                         placeholder=" "
-                        onBlur={onBlurHandler}
+                        onBlur={(e) => passwordsMatchErrorHandler(e)}
                     />
                     {errors.rePass && <p className="formError">Passwords does not match</p>}
                     <div className="cut cut-short" />
@@ -144,7 +159,7 @@ export const Register = () => {
 
 
                 </div>
-                <input type="submit" className="submit" value="Регистрирай се" />
+                <button className="submit" disabled={isFormValid}>Регистрирай се</button>
                 {serverErrors.length > 0 && <p className="serverErrors" >{serverErrors.split(",").join('')}</p>}
 
                 <Link to={"/auth/login"} className="registered">Имате регистрация ?</Link>

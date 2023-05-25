@@ -2,6 +2,6 @@ import {useEffect} from 'react';
 
 export const UserProfile = () => {
     return (
-        console.log()
+        console.log('User Profile')
     );
 }

@@ -16,7 +16,7 @@ async function requester(method, url, data) {
     if (serializedAuth) {
         const auth = JSON.parse(serializedAuth);
 
-        if (auth.token.accessToken) {
+        if (auth.token?.accessToken) {
             options.headers = {
                 ...options.headers,
                 'X-Authorization': auth.token.accessToken,
